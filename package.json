@@ -2,7 +2,11 @@
   "name": "strongmind",
   "version": "1.0.0",
   "description": "StrongMind Pizzeria Repository",
-  "scripts": {},
+  "scripts": {
+    "start": "cd server && npm start",
+    "build": "(cd client && npm run css:build) && (cd server && npm run build) && (cd client && npm run build)",
+    "dev": "concurrently \"cd server && npm run dev\" \"cd client && npm run dev\" \"cd client && npm run css:watch\""
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/spencercreer/StrongMind.git"
@@ -12,5 +16,8 @@
   "bugs": {
     "url": "https://github.com/spencercreer/StrongMind/issues"
   },
-  "homepage": "https://github.com/spencercreer/StrongMind#readme"
+  "homepage": "https://github.com/spencercreer/StrongMind#readme",
+  "devDependencies": {
+    "concurrently": "^9.0.1"
+  }
 }

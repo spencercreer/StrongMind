@@ -1,9 +1,20 @@
+import React from "react";
+import useGet from "./hooks/useGet";
 import "./App.css";
 
 function App() {
+  const { data, error, isLoading } = useGet<{
+    message: string;
+    status: string;
+  }>(`health`);
+
+  if (isLoading) return <div>Loading...</div>;
+  if (error || !data) return <div>Error</div>;
+
   return (
     <div>
       <h1 className="text-blue-500">StrongMind Pizzeria</h1>
+      <h2>{data.message} Pizza</h2>
       <a
         href="https://github.com/spencercreer/StrongMind"
         target="_blank"
