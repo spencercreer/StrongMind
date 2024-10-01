@@ -1,0 +1,16 @@
+{
+  "name": "strongmind",
+  "version": "1.0.0",
+  "description": "StrongMind Pizzeria Repository",
+  "scripts": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/spencercreer/StrongMind.git"
+  },
+  "author": "Spencer Creer",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/spencercreer/StrongMind/issues"
+  },
+  "homepage": "https://github.com/spencercreer/StrongMind#readme"
+}
