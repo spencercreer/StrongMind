@@ -9,7 +9,7 @@
     "css:build": "npx tailwindcss -i ./src/App.css -o ./src/output.css",
     "css:watch": "npx tailwindcss -i ./src/App.css -o ./src/output.css --watch",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "test": "react-scripts test --env=jsdom"
   },
   "dependencies": {
     "react": "^18.3.1",

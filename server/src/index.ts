@@ -15,11 +15,15 @@ app.use(
 
 app.use(routes);
 
-connection.once("open", () => {
-  /* eslint-disable-next-line no-console */
-  console.log("Database connection successful");
-  app.listen(port, () => {
+if (require.main === module) {
+  connection.once("open", () => {
     /* eslint-disable-next-line no-console */
-    console.log(`Server is listening at ${port}`);
+    console.log("Database connection successful");
+    app.listen(port, () => {
+      /* eslint-disable-next-line no-console */
+      console.log(`Server is listening at ${port}`);
+    });
   });
-});
+}
+
+export default app;

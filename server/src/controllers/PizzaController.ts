@@ -18,8 +18,11 @@ export default class PizzaController {
   async getPizza(req: Request, res: Response) {
     try {
       const pizza = await Pizza.findById(req.params.pizzaId);
-      if (!pizza) res.status(404).json({ message: "Pizza not found" });
-      res.status(201).json(pizza);
+      if (!pizza) {
+        res.status(404).json({ message: "Pizza not found" });
+      } else {
+        res.status(200).json(pizza);
+      }
     } catch (error) {
       res.status(500).json({
         message:
@@ -30,8 +33,12 @@ export default class PizzaController {
 
   async createPizza(req: Request, res: Response) {
     try {
-      const newPizza = await Pizza.create(req.body);
-      res.status(201).json(newPizza);
+      if (!req.body.name) {
+        res.status(400).json({ message: "Pizza name is required" });
+      } else {
+        const newPizza = await Pizza.create(req.body);
+        res.status(201).json(newPizza);
+      }
     } catch (error) {
       res.status(500).json({
         message:
