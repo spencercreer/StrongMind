@@ -5,6 +5,7 @@ import app from "../index";
 import Pizza from "../models/Pizza";
 
 beforeAll(async () => {
+  await Pizza.syncIndexes();
   await Pizza.create({
     name: "Seeded Pizza",
   });

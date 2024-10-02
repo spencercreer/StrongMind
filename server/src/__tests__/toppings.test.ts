@@ -5,6 +5,7 @@ import app from "../index";
 import Topping from "../models/Topping";
 
 beforeAll(async () => {
+  await Topping.syncIndexes();
   await Topping.create({
     name: "Seeded Topping",
   });
