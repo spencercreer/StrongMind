@@ -66,5 +66,5 @@ Ensure the following technologies are installed before running the application:
 
 - **MongoDB**:  
   MongoDB is used as the database for this project. You need to install MongoDB Community Edition and have MongoShell running. Follow the official guides for installation:
-- [MacOS Installation](https://www.mongodb.com/docs/manual/tutorial/install-mongodb-on-os-x/)
-- [Windows Installation](https://www.mongodb.com/docs/manual/tutorial/install-mongodb-on-windows/)
+  - [MacOS Installation](https://www.mongodb.com/docs/manual/tutorial/install-mongodb-on-os-x/)
+  - [Windows Installation](https://www.mongodb.com/docs/manual/tutorial/install-mongodb-on-windows/)
