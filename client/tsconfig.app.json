@@ -18,7 +18,13 @@
     "strict": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
-    "noFallthroughCasesInSwitch": true
+    "noFallthroughCasesInSwitch": true,
+
+    /* Testing */
+    "esModuleInterop": true,
+    "resolveJsonModule": true,
+    "types": ["vitest", "node"]
   },
-  "include": ["src"]
+  "include": ["src", "src/**/*.test.ts", "src/**/*.test.tsx", "src/**/*.spec.ts", "src/**/*.spec.tsx"],
+  "exclude": ["node_modules"]
 }
