@@ -5,7 +5,7 @@ import app from "../index";
 import Pizza from "../models/Pizza";
 
 beforeAll(async () => {
-  const newPizza = await Pizza.create({
+  await Pizza.create({
     name: "Seeded Pizza",
   });
 });
@@ -18,12 +18,12 @@ afterAll(async () => {
 describe("Pizza schema", () => {
   it("should not create a pizza with a duplicate name", async () => {
     try {
-      const newPizza = await Pizza.create({
+      await Pizza.create({
         name: "Seeded Pizza",
       });
       throw new Error("Test failed: Duplicate pizza name was allowed");
     } catch (error: any) {
-      expect(error).toBeDefined();
+      expect(error.message).toContain("E11000");
     }
   });
 });
@@ -31,8 +31,14 @@ describe("Pizza schema", () => {
 describe("GET /pizza", () => {
   it("should return a list of pizzas", async () => {
     const response = await request(app).get("/pizza");
+
     expect(response.status).toBe(200);
     expect(response.body).toBeInstanceOf(Array);
+    expect(response.body.length).toBeGreaterThan(0);
+    response.body.forEach((pizza: any) => {
+      expect(pizza).toHaveProperty("name");
+      expect(typeof pizza.name).toBe("string");
+    });
   });
 });
 
