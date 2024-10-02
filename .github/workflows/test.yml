@@ -1,4 +1,4 @@
-name: Test
+name: Test Suite with MongoDB
 
 on:
   pull_request:
@@ -23,6 +23,8 @@ jobs:
 
       - run: npm install
 
-      - run: npm run test
+      - run: npm --prefix server install
+
+      - run: npm run test:server
         env:
           MONGODB: mongodb://localhost:27017/testdb
