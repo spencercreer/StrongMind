@@ -46,4 +46,42 @@ export default class ToppingController {
       });
     }
   }
+
+  async updateTopping(req: Request, res: Response) {
+    try {
+      const updatedTopping = await Topping.findByIdAndUpdate(
+        req.params.toppingId,
+        req.body,
+        { new: true, runValidators: true }
+      );
+      if (!updatedTopping) {
+        res.status(404).json({ message: "Topping not found" });
+      } else {
+        res.status(200).json(updatedTopping);
+      }
+    } catch (error) {
+      res.status(500).json({
+        message:
+          error instanceof Error ? error.message : "Internal server error",
+      });
+    }
+  }
+
+  async deleteTopping(req: Request, res: Response) {
+    try {
+      const deletedTopping = await Topping.findByIdAndDelete(
+        req.params.toppingId
+      );
+      if (!deletedTopping) {
+        res.status(404).json({ message: "Topping not found" });
+      } else {
+        res.status(200).json({ message: "Topping deleted successfully" });
+      }
+    } catch (error) {
+      res.status(500).json({
+        message:
+          error instanceof Error ? error.message : "Internal server error",
+      });
+    }
+  }
 }

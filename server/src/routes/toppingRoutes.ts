@@ -10,6 +10,10 @@ toppingRoutes
   .get(toppingController.getToppings)
   .post(toppingController.createTopping);
 
-toppingRoutes.route("/:toppingId").get(toppingController.getTopping);
+toppingRoutes
+  .route("/:toppingId")
+  .get(toppingController.getTopping)
+  .put(toppingController.updateTopping)
+  .delete(toppingController.deleteTopping);
 
 export default toppingRoutes;

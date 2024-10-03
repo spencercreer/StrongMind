@@ -29,3 +29,7 @@ function useGenericMutation<T>(
 export function useCreateTopping(options: MutationOptions<Topping>) {
   return useGenericMutation(client.createTopping, options);
 }
+
+export function useDeleteTopping(options: MutationOptions<string>) {
+  return useGenericMutation(client.deleteTopping, options);
+}

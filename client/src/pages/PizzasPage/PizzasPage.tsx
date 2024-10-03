@@ -1,5 +1,5 @@
 import React from "react";
-import { useGetPizzas } from "../api/queries";
+import { useGetPizzas } from "../../api/queries";
 
 export default function PizzasPage() {
   const { data: pizzas, isError, isLoading } = useGetPizzas();

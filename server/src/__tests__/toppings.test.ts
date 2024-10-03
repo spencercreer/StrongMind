@@ -116,3 +116,84 @@ describe("POST /topping", () => {
     expect(response.body.message).toBe("Topping name is required");
   });
 });
+
+describe("PUT /topping/:id", () => {
+  beforeAll(async () => {
+    await Topping.deleteMany({ name: "Updated Topping" });
+  });
+
+  afterAll(async () => {
+    await Topping.deleteMany({ name: "Updated Topping" });
+  });
+
+  it("should update a topping successfully", async () => {
+    const topping = await Topping.findOne({ name: "Seeded Topping" });
+    const updatedTopping = { name: "Updated Topping" };
+
+    if (!topping) {
+      throw new Error('Test failed: No "Seeded Topping" found in the database');
+    }
+
+    const response = await request(app)
+      .put(`/topping/${topping._id}`)
+      .send(updatedTopping)
+      .set("Accept", "application/json");
+
+    console.log(response);
+
+    expect(response.status).toBe(200);
+    expect(response.body.name).toBe(updatedTopping.name);
+
+    const toppingInDb = await Topping.findById(topping._id);
+    expect(toppingInDb?.name).toBe(updatedTopping.name);
+  });
+
+  it("should return 404 for a non-existent topping ID", async () => {
+    const nonExistentId = new mongoose.Types.ObjectId();
+    const updatedTopping = { name: "Non-existent topping" };
+
+    const response = await request(app)
+      .put(`/topping/${nonExistentId}`)
+      .send(updatedTopping)
+      .set("Accept", "application/json");
+
+    expect(response.status).toBe(404);
+    expect(response.body.message).toBe("Topping not found");
+  });
+});
+
+describe("DELETE /topping/:id", () => {
+  beforeAll(async () => {
+    await Topping.syncIndexes();
+    await Topping.create({
+      name: "Topping to delete",
+    });
+  });
+
+  it("should delete a topping successfully", async () => {
+    const topping = await Topping.findOne({ name: "Topping to delete" });
+
+    if (!topping) {
+      throw new Error(
+        'Test failed: No "Topping to delete" found in the database'
+      );
+    }
+
+    const response = await request(app).delete(`/topping/${topping._id}`);
+
+    expect(response.status).toBe(200);
+    expect(response.body.message).toBe("Topping deleted successfully");
+
+    const toppingInDb = await Topping.findById(topping._id);
+    expect(toppingInDb).toBeNull();
+  });
+
+  it("should return 404 for a non-existent topping ID", async () => {
+    const nonExistentId = new mongoose.Types.ObjectId();
+
+    const response = await request(app).delete(`/topping/${nonExistentId}`);
+
+    expect(response.status).toBe(404);
+    expect(response.body.message).toBe("Topping not found");
+  });
+});
