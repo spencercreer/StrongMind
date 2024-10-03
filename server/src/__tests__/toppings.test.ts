@@ -139,8 +139,6 @@ describe("PUT /topping/:id", () => {
       .send(updatedTopping)
       .set("Accept", "application/json");
 
-    console.log(response);
-
     expect(response.status).toBe(200);
     expect(response.body.name).toBe(updatedTopping.name);
 
