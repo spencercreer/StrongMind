@@ -1,5 +1,5 @@
 import { DefaultError, useMutation } from "@tanstack/react-query";
-import { Topping } from "../types";
+import { Pizza, Topping } from "../types";
 import * as client from "./client";
 
 interface MutationOptions<T> {
@@ -24,6 +24,10 @@ function useGenericMutation<T>(
     onSuccess: options.onSuccess,
     onError: options.onError,
   });
+}
+
+export function useCreatePizza(options: MutationOptions<Pizza>) {
+  return useGenericMutation(client.createPizza, options);
 }
 
 export function useCreateTopping(options: MutationOptions<Topping>) {

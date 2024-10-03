@@ -1,20 +1,10 @@
 import React from "react";
-import { useGetPizzas } from "../../api/queries";
+import PizzasList from "./components/PizzasList";
 
 export default function PizzasPage() {
-  const { data: pizzas, isError, isLoading } = useGetPizzas();
-
-  if (isLoading) return <div>Loading...</div>;
-  if (isError || !pizzas) return <div>Error</div>;
-
   return (
-    <div className="h-screen bg-tan p-8">
-      <div className="w-96 mx-auto">
-        <h1 className="font-pacifico">Pizza Menu</h1>
-        {pizzas.map(({ name }, i) => (
-          <h2 key={`${i}_${name}`}>{name}</h2>
-        ))}
-      </div>
+    <div className="h-screen bg-tan py-8 px-12 md:px-32">
+      <PizzasList />
     </div>
   );
 }

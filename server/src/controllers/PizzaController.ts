@@ -5,7 +5,7 @@ export default class PizzaController {
   async getPizzas(req: Request, res: Response) {
     try {
       const query = req.query;
-      const pizzas = await Pizza.find(query);
+      const pizzas = await Pizza.find(query).populate("toppings");
       res.status(200).json(pizzas);
     } catch (error) {
       res.status(500).json({

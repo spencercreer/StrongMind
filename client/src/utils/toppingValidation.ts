@@ -5,7 +5,8 @@ export function isValidTopping(
   toppingList: Topping[]
 ): boolean {
   const isDuplicate = toppingList.some(
-    (topping) => topping.name.toLowerCase() === toppingName.toLowerCase()
+    (topping) =>
+      topping.name.trim().toLowerCase() === toppingName.trim().toLowerCase()
   );
 
   return !isDuplicate;
