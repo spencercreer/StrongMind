@@ -11,6 +11,7 @@
 - [Running Unit Tests](#running-unit-tests)
 - [Building the Application](#building-the-application)
 - [Prerequisite Technologies](#prerequisite-technologies)
+- [Overview and Thought Process](#overview-and-thought-process)
 
 ## Installation
 
@@ -76,3 +77,21 @@ Ensure the following technologies are installed before running the application:
   MongoDB is used as the database for this project. You need to install MongoDB Community Edition and have MongoShell running. Follow the official guides for installation:
   - [MacOS Installation](https://www.mongodb.com/docs/manual/tutorial/install-mongodb-on-os-x/)
   - [Windows Installation](https://www.mongodb.com/docs/manual/tutorial/install-mongodb-on-windows/)
+
+## Overview and Thought Process
+
+TDD red, green approach
+
+### Server
+
+Deleting Pizzas should not delete associated toppings.
+
+### Client
+
+Responsive layout using TailwindCSS's grid system
+
+Validations
+
+component library
+
+### Infrastructure

@@ -7,11 +7,10 @@ export default {
   theme: {
     extend: {
       colors: {
-        blue: "#191B1F",
-        lightblue: "#3DBCD0",
-        red: "#FF2732",
+        green: "#026B3B",
+        red: "#B4073A",
+        white: "#F5F5F5",
         yellow: "#FDBB12",
-        green: "#62C46F",
         tan: "#D7D7C5",
       },
       fontFamily: {

@@ -1,10 +1,10 @@
 import { isValidTopping } from "../toppingValidation";
 import { expect, describe, it } from "vitest";
 
-describe("toppingValidation", () => {
+describe("isValidTopping", () => {
   const toppingList = [
     {
-      name: "pepperoni",
+      name: "pepperoni   ",
     },
     {
       name: "pineapple",
@@ -16,5 +16,13 @@ describe("toppingValidation", () => {
 
   it("should allow unique toppings", () => {
     expect(isValidTopping("sausage", toppingList)).toBe(true);
+  });
+
+  it("should not allow toppings surrounded by extra spaces", () => {
+    expect(isValidTopping("   pepperoni   ", toppingList)).toBe(false);
+  });
+
+  it("should not be case sensitive", () => {
+    expect(isValidTopping("PINEapple", toppingList)).toBe(false);
   });
 });

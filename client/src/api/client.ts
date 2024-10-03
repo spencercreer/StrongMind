@@ -45,6 +45,10 @@ export async function getPizzas() {
   return get<Pizza[]>("/pizza");
 }
 
+export async function createPizza(body: Pizza) {
+  return post<Pizza>("/pizza", body);
+}
+
 export async function getToppings() {
   return get<Topping[]>("/topping");
 }
