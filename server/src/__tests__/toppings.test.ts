@@ -22,7 +22,6 @@ describe("Topping schema", () => {
       const newTopping = await Topping.create({
         name: "Seeded Topping",
       });
-      console.log(newTopping);
       throw new Error("Test failed: Duplicate topping name was allowed");
     } catch (error: any) {
       expect(error.message).toContain("E11000");

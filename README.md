@@ -4,6 +4,14 @@
 
 **StrongMind Pizzeria** is a full-stack application that allows users to explore and manage pizza offerings. This repository contains both the server-side API and the client-side frontend.
 
+## Table of Contents
+
+- [Installation](#installation)
+- [Development](#development)
+- [Running Unit Tests](#running-unit-tests)
+- [Building the Application](#building-the-application)
+- [Prerequisite Technologies](#prerequisite-technologies)
+
 ## Installation
 
 Before installing the project, ensure you have the necessary [prerequisite technologies](#prerequisite-technologies) installed on your machine.
@@ -37,7 +45,7 @@ To start the local development environment:
 3. Ensure the server is running by sending a GET request to the following endpoint:  
    [http://localhost:3000/health](http://localhost:3000/health)
 
-## Running Unit Tests Locally
+## Running Unit Tests
 
 To run the unit tests, ensure you have MongoDB running locally.
 
