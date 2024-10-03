@@ -6,17 +6,21 @@ import PizzasPage from "./pages/PizzasPage";
 import ToppingsPage from "./pages/ToppingsPage";
 import ErrorPage from "./pages/ErrorPage";
 import Header from "./components/Header";
+import Footer from "./components/Footer";
 
 function App() {
   return (
     <Router>
-      <Header />
-      <Routes>
-        <Route path="/" element={<LandingPage />} />
-        <Route path="/pizzas" element={<PizzasPage />} />
-        <Route path="/toppings" element={<ToppingsPage />} />
-        <Route path="*" element={<ErrorPage />} />
-      </Routes>
+      <div className="flex flex-col h-screen">
+        <Header />
+        <Routes>
+          <Route path="/" element={<LandingPage />} />
+          <Route path="/pizzas" element={<PizzasPage />} />
+          <Route path="/toppings" element={<ToppingsPage />} />
+          <Route path="*" element={<ErrorPage />} />
+        </Routes>
+        <Footer />
+      </div>
     </Router>
   );
 }
