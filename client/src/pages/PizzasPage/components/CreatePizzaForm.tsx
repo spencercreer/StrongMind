@@ -9,6 +9,7 @@ import Input from "../../../componentLibrary/Input";
 import Button from "../../../componentLibrary/Button";
 import ToppingSelect from "./ToppingSelect";
 import { MultiSelectOption } from "../../../componentLibrary/MultiSelectDropdown";
+import PopConfirm from "../../../componentLibrary/PopConfirm";
 
 const blankPizza = {
   name: "",
@@ -83,9 +84,19 @@ export default function CreatePizzaForm({ pizzaList }: { pizzaList: Pizza[] }) {
     <>
       <div className="flex flex-row justify-between">
         <h1 className="font-pacifico mb-4">Create Pizza</h1>
-        <Button variant="secondary" onClick={() => navigate("/toppings")}>
-          <PlusIcon className="w-5 h-5" /> Add Topping
-        </Button>
+        <PopConfirm
+          prompt={
+            <div>
+              <h2>Are you sure?</h2>
+              <h3>Changes made to a pizza creation will be lost.</h3>
+            </div>
+          }
+          onConfirm={() => navigate("/toppings")}
+        >
+          <div className="text-red flex flex-row items-center">
+            <PlusIcon className="w-5 h-5" /> Topping
+          </div>
+        </PopConfirm>
       </div>
       <hr className="py-2 border-gray-400" />
       <form
