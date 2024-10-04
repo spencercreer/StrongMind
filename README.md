@@ -1,8 +1,8 @@
-# StrongMind Pizzeria
+# TopThat Pizzeria
 
 ## Overview
 
-**StrongMind Pizzeria** is a full-stack application that allows users to explore and manage pizza offerings. This repository contains both the server-side API and the client-side frontend.
+**TopThat Pizzeria** is a full-stack application that allows users to explore and manage pizza offerings. This repository contains both the server-side API and the client-side frontend.
 
 ## Table of Contents
 
@@ -80,19 +80,39 @@ Ensure the following technologies are installed before running the application:
 
 ## Overview and Thought Process
 
-TDD red, green approach
+### Test-Driven Development (TDD)
+
+In this project, I adopted a **Test-Driven Development (TDD) Red-Green-Refactor** approach to ensure that every piece of functionality is thoroughly tested before implementation. This ensures that code is written with a clear focus on fulfilling specific requirements and that each feature behaves as expected.
+
+To maintain code quality, both server and client tests are automatically executed when a pull request is made to the main branch. This setup helps to catch any breaking changes early, ensuring that the main branch remains stable.
+
+### Database
+
+For this project, I chose **MongoDB**, a NoSQL database, due to its flexibility in handling non-relational data. Since the data for this application has minimal relationships and does not require the strong ACID transactions provided by SQL databases, MongoDB is a more suitable choice for performance and scalability. However, if the data model evolves to include more complex relationships, then transitioning to an SQL database should be considered.
+
+#### Data Deletion Strategy
+
+The deletion strategy focuses on maintaining the integrity between pizzas and their toppings.
+
+- **Deleting a Topping**: If a topping is deleted, all pizzas using that topping are also deleted. This ensures that pizzas with unavailable toppings cannot be ordered.
+- **Deleting a Pizza**: Deleting a pizza does not affect its associated toppings, which remain available for other pizzas.
+
+This approach ensures that the pizza-topping relationship is always valid based on the available toppings.
 
 ### Server
 
-Deleting Pizzas should not delete associated toppings.
-Deleting a topping should delete any pizza that utilizes it.
-
 ### Client
 
-Responsive layout using TailwindCSS's grid system
+The client uses react
+
+Mobile-first Responsive layout using TailwindCSS's grid system
 
 Validations
 
-component library
+Headless ui for component library
 
 ### Infrastructure
+
+I chose to use aws because of its scalability, efficiency, and because it allows complete controll of the cloud infrastructure. This is key if the application is to increase it's number of users.
+
+A future improvement could be to

@@ -1,4 +1,3 @@
-import React from "react";
 import ToppingsList from "./components/ToppingsList";
 
 export default function ToppingsPage() {

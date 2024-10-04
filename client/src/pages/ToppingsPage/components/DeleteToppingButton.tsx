@@ -1,4 +1,3 @@
-import React from "react";
 import { useQueryClient } from "@tanstack/react-query";
 import { TrashIcon } from "@heroicons/react/24/solid";
 import { useDeleteTopping } from "../../../api/mutations";

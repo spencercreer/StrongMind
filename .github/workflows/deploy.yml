@@ -1,0 +1,71 @@
+name: Build and Deploy
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build_and_deploy:
+    name: Build and Deploy Application
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+
+      - name: Install client dependencies
+        run: npm install --prefix client
+
+      - name: Build Tailwind CSS
+        run: npm run css:build --prefix client
+
+      - name: Build client
+        run: npm run build --prefix client
+
+      - name: Install server dependencies
+        run: npm install --prefix server
+
+      - name: Build server
+        run: npm run build --prefix server
+
+      - name: Package server and client artifacts
+        run: |
+          mkdir -p dist
+          cp -R server/dist dist/server
+          cp -R client/dist dist/client
+          cp server/package.json dist/server/package.json
+          cp server/package-lock.json dist/server/package-lock.json
+
+      - name: Deploy client to S3
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          AWS_REGION: "us-east-1"
+          S3_BUCKET: ${{ secrets.S3_BUCKET }}
+        run: |
+          aws s3 sync dist/client s3://$S3_BUCKET --delete
+
+      - name: Install SSH Key
+        uses: webfactory/ssh-agent@v0.5.3
+        with:
+          ssh-private-key: ${{ secrets.EC2_SSH_KEY }}
+
+      - name: Deploy server build to EC2
+        run: |
+          ssh -o StrictHostKeyChecking=no ec2-user@${{ secrets.EC2_HOST }} "rm -rf /home/ec2-user/server"
+          scp -o StrictHostKeyChecking=no -r dist/server ec2-user@${{ secrets.EC2_HOST }}:/home/ec2-user/server
+          scp -o StrictHostKeyChecking=no server/package.json server/package-lock.json ec2-user@${{ secrets.EC2_HOST }}:/home/ec2-user/server
+
+      - name: Restart server on EC2
+        run: |
+          ssh -o StrictHostKeyChecking=no ec2-user@${{ secrets.EC2_HOST }} << 'EOF'
+            cd /home/ec2-user/server
+            npm install --production
+            pm2 restart topthat_server || pm2 start index.js --name topthat_server
+          EOF

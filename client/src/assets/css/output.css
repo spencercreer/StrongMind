@@ -754,14 +754,6 @@ video {
   min-width: 13rem;
 }
 
-.min-w-72 {
-  min-width: 18rem;
-}
-
-.min-w-96 {
-  min-width: 24rem;
-}
-
 .min-w-80 {
   min-width: 20rem;
 }

@@ -1,4 +1,3 @@
-import React from "react";
 import { useGetToppings } from "../../../api/queries";
 import MultiSelectDropdown, {
   MultiSelectOption,

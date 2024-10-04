@@ -1,4 +1,3 @@
-import React from "react";
 import PizzasList from "./components/PizzasList";
 
 export default function PizzasPage() {

@@ -1,4 +1,3 @@
-import React from "react";
 import { Link as L, useLocation } from "react-router-dom";
 
 export default function Link({ to, text }: { to: string; text: string }) {
