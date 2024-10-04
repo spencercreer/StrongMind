@@ -38,6 +38,16 @@ export function useCreateTopping(options: MutationOptions<Topping>) {
   return useGenericMutation(client.createTopping, options);
 }
 
+export function useUpdateTopping(
+  options: MutationOptions<Topping>,
+  id: string
+) {
+  return useGenericMutation(
+    (body: Topping) => client.updateTopping(id, body),
+    options
+  );
+}
+
 export function useDeleteTopping(options: MutationOptions<string>) {
   return useGenericMutation(client.deleteTopping, options);
 }

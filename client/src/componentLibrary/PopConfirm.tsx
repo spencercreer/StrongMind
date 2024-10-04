@@ -45,7 +45,7 @@ const PopConfirm: React.FC<PopConfirmProps> = ({
     <Popover className="relative">
       {({ close }) => (
         <>
-          <PopoverButton className="focus:outline-none focus:border-none focus:outline-0 focus:ring-0 ">
+          <PopoverButton className="flex focus:outline-none focus:border-none focus:outline-0 focus:ring-0 items-center">
             {children}
           </PopoverButton>
           <Transition
