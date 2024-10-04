@@ -16,7 +16,7 @@ export default function Button({
   const buttonClass = () => {
     switch (variant) {
       case "secondary":
-        return "flex justify-center items-center font-medium bg-transparent hover:text-red focus:text-red focus:outline-none focus:border-none focus:outline-0 focus:ring-0 disabled:bg-transparent disabled:cursor-not-allowed";
+        return "flex justify-center items-center font-medium bg-transparent text-red hover:text-red focus:text-red focus:outline-none focus:border-none focus:outline-0 focus:ring-0 disabled:bg-transparent disabled:cursor-not-allowed";
       default:
         // Default to primary
         return "w-fit flex justify-center items-center px-4 py-2 rounded-full shadow-lg bg-red font-semibold text-lg text-white hover:bg-green focus:bg-green focus:outline-none active:shadow-none disabled:bg-gray-500 disabled:cursor-not-allowed disabled:shadow-lg";

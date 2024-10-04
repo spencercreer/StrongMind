@@ -1,5 +1,7 @@
 import React, { useState, FormEvent } from "react";
 import { Pizza } from "../../../types";
+import { useNavigate } from "react-router-dom";
+import { PlusIcon } from "@heroicons/react/16/solid";
 import { useQueryClient } from "@tanstack/react-query";
 import { useCreatePizza } from "../../../api/mutations";
 import { isValidPizzaSubmission } from "./utils/pizzaFormValidation";
@@ -24,6 +26,8 @@ export default function CreatePizzaForm({ pizzaList }: { pizzaList: Pizza[] }) {
     topping: "",
     default: "",
   });
+
+  const navigate = useNavigate();
 
   const queryClient = useQueryClient();
 
@@ -77,9 +81,12 @@ export default function CreatePizzaForm({ pizzaList }: { pizzaList: Pizza[] }) {
 
   return (
     <>
-      <h1 className="font-pacifico text-2xl mb-4">
-        Create your pizza masterpiece
-      </h1>
+      <div className="flex flex-row justify-between">
+        <h1 className="font-pacifico mb-4">Create Pizza</h1>
+        <Button variant="secondary" onClick={() => navigate("/toppings")}>
+          <PlusIcon className="w-5 h-5" /> Add Topping
+        </Button>
+      </div>
       <hr className="py-2 border-gray-400" />
       <form
         onSubmit={handleSubmit}

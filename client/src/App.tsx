@@ -1,7 +1,6 @@
 import React from "react";
 import "./App.css";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import LandingPage from "./pages/LandingPage/LandingPage";
 import PizzasPage from "./pages/PizzasPage/PizzasPage";
 import ToppingsPage from "./pages/ToppingsPage/ToppingsPage";
 import ErrorPage from "./pages/ErrorPage/ErrorPage";
@@ -14,8 +13,7 @@ function App() {
       <div className="flex flex-col h-screen">
         <Header />
         <Routes>
-          <Route path="/" element={<LandingPage />} />
-          <Route path="/pizzas" element={<PizzasPage />} />
+          <Route path="/" element={<PizzasPage />} />
           <Route path="/toppings" element={<ToppingsPage />} />
           <Route path="*" element={<ErrorPage />} />
         </Routes>
