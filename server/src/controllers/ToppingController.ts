@@ -1,5 +1,6 @@
 import { Request, Response } from "express";
 import Topping from "../models/Topping";
+import Pizza from "../models/Pizza";
 
 export default class ToppingController {
   async getToppings(req: Request, res: Response) {
@@ -72,10 +73,15 @@ export default class ToppingController {
       const deletedTopping = await Topping.findByIdAndDelete(
         req.params.toppingId
       );
+
       if (!deletedTopping) {
         res.status(404).json({ message: "Topping not found" });
       } else {
-        res.status(200).json({ message: "Topping deleted successfully" });
+        await Pizza.deleteMany({ toppings: { $in: [deletedTopping._id] } });
+
+        res.status(200).json({
+          message: "Topping and associated pizzas deleted successfully",
+        });
       }
     } catch (error) {
       res.status(500).json({

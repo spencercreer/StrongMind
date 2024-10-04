@@ -8,12 +8,8 @@ export default function Link({ to, text }: { to: string; text: string }) {
   return (
     <L
       to={to}
-      className={`text-yellow transition-colors duration-300 
-         ${
-           isActive
-             ? "font-bold text-green underline"
-             : "font-normal hover:text-blue-700 hover:underline"
-         }`}
+      className={`text-yellow text-lg transition-colors duration-300 
+         ${isActive ? "font-bold underline" : "font-normal hover:text-white"}`}
     >
       {text}
     </L>

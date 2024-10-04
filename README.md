@@ -85,6 +85,7 @@ TDD red, green approach
 ### Server
 
 Deleting Pizzas should not delete associated toppings.
+Deleting a topping should delete any pizza that utilizes it.
 
 ### Client
 

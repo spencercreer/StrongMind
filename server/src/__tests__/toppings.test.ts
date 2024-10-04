@@ -3,6 +3,7 @@ import mongoose from "mongoose";
 import connection from "../db/connection";
 import app from "../index";
 import Topping from "../models/Topping";
+import Pizza from "../models/Pizza";
 
 beforeAll(async () => {
   await Topping.syncIndexes();
@@ -119,7 +120,7 @@ describe("POST /topping", () => {
 
 describe("PUT /topping/:id", () => {
   beforeAll(async () => {
-    await Topping.deleteMany({ name: "Updated Topping" });
+    const topping = await Topping.deleteMany({ name: "Updated Topping" });
   });
 
   afterAll(async () => {
@@ -163,27 +164,43 @@ describe("PUT /topping/:id", () => {
 describe("DELETE /topping/:id", () => {
   beforeAll(async () => {
     await Topping.syncIndexes();
-    await Topping.create({
+    const topping = await Topping.create({
       name: "Topping to delete",
+    });
+    await Pizza.deleteMany({
+      name: "Pizza that should delete",
+    });
+    await Pizza.create({
+      name: "Pizza that should delete",
+      toppings: [topping._id],
     });
   });
 
-  it("should delete a topping successfully", async () => {
+  it("should delete a topping and any pizza using a it", async () => {
+    let pizza = await Pizza.findOne({ name: "Pizza that should delete" });
+
+    expect(pizza).not.toBeNull();
+
     const topping = await Topping.findOne({ name: "Topping to delete" });
 
+    expect(topping).not.toBeNull();
+
     if (!topping) {
-      throw new Error(
-        'Test failed: No "Topping to delete" found in the database'
-      );
+      throw new Error("Topping not found in the database");
     }
 
     const response = await request(app).delete(`/topping/${topping._id}`);
 
     expect(response.status).toBe(200);
-    expect(response.body.message).toBe("Topping deleted successfully");
+    expect(response.body.message).toBe(
+      "Topping and associated pizzas deleted successfully"
+    );
 
-    const toppingInDb = await Topping.findById(topping._id);
-    expect(toppingInDb).toBeNull();
+    const deletedTopping = await Topping.findById(topping._id);
+    expect(deletedTopping).toBeNull();
+
+    pizza = await Pizza.findOne({ name: "Pizza that should delete" });
+    expect(pizza).toBeNull();
   });
 
   it("should return 404 for a non-existent topping ID", async () => {

@@ -116,3 +116,40 @@ describe("POST /pizza", () => {
     expect(response.body.message).toBe("Pizza name is required");
   });
 });
+
+describe("DELETE /pizza/:id", () => {
+  beforeAll(async () => {
+    await Pizza.syncIndexes();
+    await Pizza.deleteMany({ name: "Pizza to delete" });
+    await Pizza.create({
+      name: "Pizza to delete",
+    });
+  });
+
+  it("should delete a pizza successfully", async () => {
+    const pizza = await Pizza.findOne({ name: "Pizza to delete" });
+
+    if (!pizza) {
+      throw new Error(
+        'Test failed: No "Pizza to delete" found in the database'
+      );
+    }
+
+    const response = await request(app).delete(`/pizza/${pizza._id}`);
+
+    expect(response.status).toBe(200);
+    expect(response.body.message).toBe("Pizza deleted successfully");
+
+    const pizzaInDb = await Pizza.findById(pizza._id);
+    expect(pizzaInDb).toBeNull();
+  });
+
+  it("should return 404 for a non-existent pizza ID", async () => {
+    const nonExistentId = new mongoose.Types.ObjectId();
+
+    const response = await request(app).delete(`/pizza/${nonExistentId}`);
+
+    expect(response.status).toBe(404);
+    expect(response.body.message).toBe("Pizza not found");
+  });
+});

@@ -3,6 +3,7 @@ import { useGetToppings } from "../../../api/queries";
 import MultiSelectDropdown, {
   MultiSelectOption,
 } from "../../../componentLibrary/MultiSelectDropdown";
+import Spinner from "../../../componentLibrary/Spinner";
 
 export default function ToppingSelect({
   value,
@@ -13,7 +14,7 @@ export default function ToppingSelect({
 }) {
   const { data: toppings, isError, isLoading } = useGetToppings();
 
-  if (isLoading) return <div>Loading...</div>;
+  if (isLoading) return <Spinner />;
   if (isError || !toppings) return <div>Error</div>;
 
   return (
