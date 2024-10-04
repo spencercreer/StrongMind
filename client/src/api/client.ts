@@ -63,6 +63,10 @@ export async function createPizza(body: Pizza) {
   return post<Pizza>("/pizza", body);
 }
 
+export async function updatePizza(id: string, body: Pizza) {
+  return put<Pizza>(`${apiBaseUrl}/pizza/${id}`, body);
+}
+
 export async function deletePizza(id: string) {
   return deleteItem(`/pizza/${id}`);
 }

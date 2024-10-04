@@ -30,6 +30,13 @@ export function useCreatePizza(options: MutationOptions<Pizza>) {
   return useGenericMutation(client.createPizza, options);
 }
 
+export function useUpdatePizza(options: MutationOptions<Pizza>, id: string) {
+  return useGenericMutation(
+    (body: Pizza) => client.updatePizza(id, body),
+    options
+  );
+}
+
 export function useDeletePizza(options: MutationOptions<string>) {
   return useGenericMutation(client.deletePizza, options);
 }
