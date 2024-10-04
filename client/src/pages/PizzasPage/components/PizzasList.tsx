@@ -1,16 +1,20 @@
-import React, { useState } from "react";
-import { TrashIcon } from "@heroicons/react/16/solid";
+import React, { Dispatch, SetStateAction, useState } from "react";
+import { PencilSquareIcon, TrashIcon } from "@heroicons/react/16/solid";
 import { useQueryClient } from "@tanstack/react-query";
+import { useDeletePizza } from "../../../api/mutations";
 import { useGetPizzas } from "../../../api/queries";
+import { Pizza } from "../../../types";
 import CreatePizzaForm from "./../components/CreatePizzaForm";
 import Modal from "../../../componentLibrary/Modal";
 import Container from "../../../componentLibrary/Container";
 import PopConfirm from "../../../componentLibrary/PopConfirm";
-import { useDeletePizza } from "../../../api/mutations";
 import Spinner from "../../../componentLibrary/Spinner";
+import Button from "../../../componentLibrary/Button";
+import EditPizzaModal from "./EditPizzaModal";
 
 export default function PizzasList() {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [updatePizza, setUpdatePizza] = useState<Pizza>();
 
   const openModal = () => {
     setIsModalOpen(true);
@@ -43,12 +47,20 @@ export default function PizzasList() {
             <div key={`Pizza_${pizza.name}_${i}`}>
               <div className="flex flex-row justify-between overflow-visible">
                 <h2 className="capitalize">{pizza.name}</h2>
-                <PopConfirm
-                  prompt="Are you sure you want to delete this Pizza?"
-                  onConfirm={() => mutation.mutate(pizza._id!)}
-                >
-                  <TrashIcon className="w-6 h-6 text-red" />
-                </PopConfirm>
+                <div className="flex space-x-2 justify-center items-center">
+                  <Button
+                    variant="secondary"
+                    onClick={() => setUpdatePizza(pizza)}
+                  >
+                    <PencilSquareIcon className="w-6 h-6" color="black" />
+                  </Button>
+                  <PopConfirm
+                    prompt="Are you sure you want to delete this Pizza?"
+                    onConfirm={() => mutation.mutate(pizza._id!)}
+                  >
+                    <TrashIcon className="w-6 h-6 text-red" />
+                  </PopConfirm>
+                </div>
               </div>
               {pizza.toppings.map((topping, i) => (
                 <p
@@ -77,6 +89,35 @@ export default function PizzasList() {
       <Modal isOpen={isModalOpen} onCloseModal={closeModal}>
         <CreatePizzaForm pizzaList={pizzas} />
       </Modal>
+      {updatePizza && (
+        <EditPizzaModal
+          pizzaList={pizzas}
+          isModalOpen={!!updatePizza}
+          closeModal={() => setUpdatePizza(undefined)}
+          updatePizza={
+            updatePizza as {
+              _id: string;
+              name: string;
+              toppings: {
+                _id: string;
+                name: string;
+              }[];
+            }
+          }
+          setUpdatePizza={
+            setUpdatePizza as Dispatch<
+              SetStateAction<{
+                _id: string;
+                name: string;
+                toppings: {
+                  _id: string;
+                  name: string;
+                }[];
+              }>
+            >
+          }
+        />
+      )}
     </div>
   );
 }

@@ -35,7 +35,7 @@ export default function Modal({
               leaveFrom="opacity-100 scale-100"
               leaveTo="opacity-0 scale-95"
             >
-              <DialogPanel className="w-4/12 min-w-72 transform overflow-visible rounded-md bg-white p-6 text-left align-middle shadow-xl transition-all">
+              <DialogPanel className="w-4/12 min-w-80 transform overflow-visible rounded-md bg-white p-6 text-left align-middle shadow-xl transition-all">
                 <div className="flex flex-row justify-end mb-2">
                   {onCloseModal && (
                     <Button variant="secondary" onClick={onCloseModal}>

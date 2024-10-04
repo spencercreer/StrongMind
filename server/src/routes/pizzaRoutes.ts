@@ -13,6 +13,7 @@ pizzaRoutes
 pizzaRoutes
   .route("/:pizzaId")
   .get(pizzaController.getPizza)
+  .put(pizzaController.updatePizza)
   .delete(pizzaController.deletePizza);
 
 export default pizzaRoutes;

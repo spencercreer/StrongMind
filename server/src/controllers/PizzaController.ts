@@ -47,6 +47,26 @@ export default class PizzaController {
     }
   }
 
+  async updatePizza(req: Request, res: Response) {
+    try {
+      const updatedPizza = await Pizza.findByIdAndUpdate(
+        req.params.pizzaId,
+        req.body,
+        { new: true, runValidators: true }
+      );
+      if (!updatedPizza) {
+        res.status(404).json({ message: "Pizza not found" });
+      } else {
+        res.status(200).json(updatedPizza);
+      }
+    } catch (error) {
+      res.status(500).json({
+        message:
+          error instanceof Error ? error.message : "Internal server error",
+      });
+    }
+  }
+
   async deletePizza(req: Request, res: Response) {
     try {
       const deletedPizza = await Pizza.findByIdAndDelete(req.params.pizzaId);
