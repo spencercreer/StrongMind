@@ -6,7 +6,7 @@ interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
 
 export default function Input({ label, ...props }: InputProps) {
   return (
-    <div className="flex flex-col w-full">
+    <div className="flex flex-col">
       {label && <label className="font-semibold">{label}</label>}
       <input
         {...props}

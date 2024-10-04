@@ -10,6 +10,9 @@ pizzaRoutes
   .get(pizzaController.getPizzas)
   .post(pizzaController.createPizza);
 
-pizzaRoutes.route("/:pizzaId").get(pizzaController.getPizza);
+pizzaRoutes
+  .route("/:pizzaId")
+  .get(pizzaController.getPizza)
+  .delete(pizzaController.deletePizza);
 
 export default pizzaRoutes;

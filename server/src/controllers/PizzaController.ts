@@ -46,4 +46,20 @@ export default class PizzaController {
       });
     }
   }
+
+  async deletePizza(req: Request, res: Response) {
+    try {
+      const deletedPizza = await Pizza.findByIdAndDelete(req.params.pizzaId);
+      if (!deletedPizza) {
+        res.status(404).json({ message: "Pizza not found" });
+      } else {
+        res.status(200).json({ message: "Pizza deleted successfully" });
+      }
+    } catch (error) {
+      res.status(500).json({
+        message:
+          error instanceof Error ? error.message : "Internal server error",
+      });
+    }
+  }
 }

@@ -80,6 +80,7 @@ export default function CreatePizzaForm({ pizzaList }: { pizzaList: Pizza[] }) {
       <h1 className="font-pacifico text-2xl mb-4">
         Create your pizza masterpiece
       </h1>
+      <hr className="py-2 border-gray-400" />
       <form
         onSubmit={handleSubmit}
         className="flex flex-col flex-grow justify-between space-y-2"

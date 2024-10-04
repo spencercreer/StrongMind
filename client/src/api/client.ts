@@ -49,6 +49,10 @@ export async function createPizza(body: Pizza) {
   return post<Pizza>("/pizza", body);
 }
 
+export async function deletePizza(id: string) {
+  return deleteItem(`/pizza/${id}`);
+}
+
 export async function getToppings() {
   return get<Topping[]>("/topping");
 }

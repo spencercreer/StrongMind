@@ -6,7 +6,7 @@ interface SpinnerProps {
 }
 
 export default function Spinner({
-  color = "#38B2E0",
+  color = "#026B3B",
   className,
 }: SpinnerProps) {
   return (
