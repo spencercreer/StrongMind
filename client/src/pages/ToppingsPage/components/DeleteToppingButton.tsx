@@ -13,6 +13,7 @@ export default function DeleteToppingButton({
   const mutation = useDeleteTopping({
     onSuccess: async () => {
       await queryClient.invalidateQueries({ queryKey: ["toppings"] });
+      await queryClient.invalidateQueries({ queryKey: ["pizzas"] });
     },
   });
   return (
