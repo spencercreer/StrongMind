@@ -22,13 +22,13 @@ Before installing the project, ensure you have the necessary [prerequisite techn
 1. Clone the repository using HTTPS or SSH:
 
 ```bash
-   git clone <repository-url>
+  git clone <repository-url>
 ```
 
 2. Navigate to the root directory and install both server and client dependencies:
 
 ```bash
-   npm install
+  npm install
 ```
 
 ## Development
@@ -38,7 +38,7 @@ To start the local development environment:
 1. After installation, run the following command:
 
 ```bash
-    npm run dev
+  npm run dev
 ```
 
 2. Access the client at [http://localhost:5173](http://localhost:5173).
@@ -53,7 +53,21 @@ To run the unit tests, ensure you have MongoDB running locally.
 Navigate to the root directory of the project and run the following command to execute the unit tests:
 
 ```bash
-    npm run test
+  npm run test
+```
+
+You can run tests for both the server and client with the following commands:
+
+- **To test the server**:
+
+```bash
+  npm run test:server
+```
+
+- **To test the client**:
+
+```bash
+  npm run test:client
 ```
 
 ## Building the Application
@@ -61,7 +75,7 @@ Navigate to the root directory of the project and run the following command to e
 To build the application for production, run:
 
 ```bash
-    npm run build
+  npm run build
 ```
 
 This will generate the production-ready files for both the client and server.
@@ -71,7 +85,7 @@ This will generate the production-ready files for both the client and server.
 Ensure the following technologies are installed before running the application:
 
 - **Node.js**:  
-  The project relies on Node.js for both the server and client. Install Node.js [here](https://nodejs.org/en/download/).
+  The project relies on Node.js for both the server and client. Install Node.js [here](https://nodejs.org/en/download/). This application was developed using Node v20.10.0.
 
 - **MongoDB**:  
   MongoDB is used as the database for this project. You need to install MongoDB Community Edition and have MongoShell running. Follow the official guides for installation:
@@ -82,13 +96,13 @@ Ensure the following technologies are installed before running the application:
 
 ### Test-Driven Development (TDD)
 
-In this project, I adopted a **Test-Driven Development (TDD) Red-Green-Refactor** approach to ensure that every piece of functionality is thoroughly tested before implementation. This ensures that code is written with a clear focus on fulfilling specific requirements and that each feature behaves as expected.
+In this project, I adopted a **Test-Driven Development (TDD) Red-Green-Refactor** approach to ensure that every piece of functionality is thoroughly tested before implementation. This ensures that code fulfills the specific requirements and that each feature behaves as expected.
 
-To maintain code quality, both server and client tests are automatically executed when a pull request is made to the main branch. This setup helps to catch any breaking changes early, ensuring that the main branch remains stable.
+To maintain code quality, both server and client tests are executed when a pull request is made to the main branch. This setup helps to catch any breaking changes early, ensuring that the main branch remains stable.
 
 ### Database
 
-For this project, I chose **MongoDB**, a NoSQL database, due to its flexibility in handling non-relational data. Since the data for this application has minimal relationships and does not require the strong ACID transactions provided by SQL databases, MongoDB is a more suitable choice for performance and scalability. However, if the data model evolves to include more complex relationships, then transitioning to an SQL database should be considered.
+For this project, I chose **MongoDB**, a NoSQL database, due to its flexibility in handling non-relational data. Since the data for this application has minimal relationships and does not require the strong ACID transactions provided by SQL databases, MongoDB is a suitable choice. However, if the data model evolves to include more complex relationships, then transitioning to an SQL database should be considered.
 
 #### Data Deletion Strategy
 
@@ -101,18 +115,20 @@ This approach ensures that the pizza-topping relationship is always valid based 
 
 ### Server
 
+The server is built using Node.js and Express, allowing for both the server and client to be written in TypeScript.
+
 ### Client
 
-The client uses react
-
-Mobile-first Responsive layout using TailwindCSS's grid system
-
-Validations
-
-Headless ui for component library
+The client is built using React with a mobile-first responsive layout utilizing Tailwind CSS's grid system. It incorporates form validations written using TDD and leverages Headless UI for a component library, ensuring a consistent user interface.
 
 ### Infrastructure
 
-I chose to use aws because of its scalability, efficiency, and because it allows complete controll of the cloud infrastructure. This is key if the application is to increase it's number of users.
+The application leverages the following AWS components:
 
-A future improvement could be to
+**Amazon S3**: Hosts the static React client. It serves static assets and is backed by **CloudFront**, a CDN that provides fast global delivery and SSL/TLS encryption.
+
+**EC2 with Elastic IP**: The Node.js server runs on an EC2 instance, offering full control over the environment. An **Application Load Balancer (ALB)** Distributes incoming traffic to a target group.
+
+I chose AWS for its scalability, efficiency, and complete control over cloud infrastructure.
+
+Future improvements could include using **Terraform** for Infrastructure as Code to enhance deployment automation and switching to a **serverless architecture** with Lambda and API Gateway to reduce costs and improve scalability.
