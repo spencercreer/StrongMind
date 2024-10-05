@@ -56,7 +56,7 @@ Navigate to the root directory of the project and run the following command to e
   npm run test
 ```
 
-You can run tests for both the server and client with the following commands:
+You can run tests for the server and client individually with the following commands:
 
 - **To test the server**:
 
@@ -128,6 +128,8 @@ The application leverages the following AWS components:
 **Amazon S3**: Hosts the static React client. It serves static assets and is backed by **CloudFront**, a CDN that provides fast global delivery and SSL/TLS encryption.
 
 **EC2 with Elastic IP**: The Node.js server runs on an EC2 instance, offering full control over the environment. An **Application Load Balancer (ALB)** Distributes incoming traffic to a target group.
+
+The client and server are deployed to this infrastructure automatically when changes are merged into the main branch using a GitHub Actions CI/CD pipeline.
 
 I chose AWS for its scalability, efficiency, and complete control over cloud infrastructure.
 
